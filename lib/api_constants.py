@@ -1,0 +1,12 @@
+# 定数ファイル(API用)
+
+
+# レスポンスコード
+class RESPONSE_CODE:
+    SUCCESS = "0000"
+    FILE_NOT_FOUND = "I001"
+    AUTH_ERROR = "E001"
+    DB_ERROR = "E002"
+    FILE_IMPORT_ERROR = "E003"
+    VALIDATION_ERROR = "E004"
+    UNKNOWN_ERROR = "E999"
