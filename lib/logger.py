@@ -17,7 +17,7 @@ class Logging(BaseHTTPMiddleware):
             log_message += f"request={dict(request.query_params)}"
         else:
             body = await request.body()
-            log_message += f"request={body.decode("utf-8", errors="replace")}"
+            log_message += f"request={body.decode('utf-8', errors='replace')}"
             request = Request(
                 request.scope, receive=lambda: {"type": "http.request", "body": body}
             )
@@ -46,7 +46,7 @@ class Logging(BaseHTTPMiddleware):
 
         # レスポンスログ出力
         logger.info(
-            f"Response: status_code={response.status_code} response={resp_body.decode("utf-8", errors="replace")} duration={process_time:.2f}ms"
+            f"Response: status_code={response.status_code} response={resp_body.decode('utf-8', errors='replace')} duration={process_time:.2f}ms"
         )
 
         return response
