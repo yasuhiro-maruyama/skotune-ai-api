@@ -4,6 +4,7 @@ from src.db.session import SessionLocal
 from src.utils.db_utils import load_sql
 from src.schema.ap001 import ap001 as ap001_schema
 from lib.api_constants import RESPONSE_CODE
+from lib.message import DB_MSG
 from src.utils.db_utils import error_response
 
 
@@ -24,7 +25,7 @@ def ap001(req: ap001_schema) -> dict:
                     "user_info": None,
                 }
 
-            # 正常にユーザー情報を取得
+            # ユーザー情報が取得できた場合、ユーザー情報を返却
             return {
                 "success_flg": True,
                 "code": RESPONSE_CODE.SUCCESS,
@@ -32,15 +33,14 @@ def ap001(req: ap001_schema) -> dict:
                 "user_info": dict(row),
             }
 
+    # ファイル取り込みエラー
     except FileNotFoundError as e:
         return error_response(RESPONSE_CODE.FILE_IMPORT_ERROR, str(e))
 
+    # DB接続エラー
     except SQLAlchemyError:
-        return error_response(
-            RESPONSE_CODE.DB_ERROR, "データベースエラーが発生しました。"
-        )
+        return error_response(RESPONSE_CODE.DB_ERROR, DB_MSG.DB_ERROR)
 
+    # 予期せぬエラー
     except Exception:
-        return error_response(
-            RESPONSE_CODE.UNKNOWN_ERROR, "予期しないエラーが発生しました。"
-        )
+        return error_response(RESPONSE_CODE.UNKNOWN_ERROR, DB_MSG.UNKNOWN_ERROR)

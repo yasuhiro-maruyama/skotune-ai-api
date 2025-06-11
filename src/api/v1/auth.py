@@ -9,5 +9,4 @@ router = APIRouter()
 # ログイン照会
 @router.post("/login")
 def login(req: ap001_schema):
-    name = ap001_service.ap001(req)
-    return {"name": name}
+    return ap001_service.ap001(req)

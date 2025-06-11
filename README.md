@@ -12,3 +12,9 @@ FestAPI 起動方法
 Spotify 個別認証方法
 　 cd ./auth
 　 python spotify_user_auth.py (認証 URL から取得したリダイレクト URL を貼り付け、トークンを取得)
+
+テーブル作成(未作成のテーブルのみ)
+python -m src.db.create_table
+
+テーブル削除
+python -m src.db.drop_table xxxx(テーブル名)
