@@ -20,7 +20,7 @@ def ap001(req: ap001_schema) -> dict:
             if row is None:
                 return {
                     "success_flg": True,
-                    "code": RESPONSE_CODE.FILE_NOT_FOUND,
+                    "code": RESPONSE_CODE.NOT_FOUND,
                     "message": "ユーザー情報が取得できませんでした。",
                     "user_info": None,
                 }

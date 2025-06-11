@@ -4,7 +4,7 @@
 # レスポンスコード
 class RESPONSE_CODE:
     SUCCESS = "0000"
-    FILE_NOT_FOUND = "I001"
+    NOT_FOUND = "I001"
     INTERNAL_SERVER_ERROR = "E000"
     AUTH_ERROR = "E001"
     DB_ERROR = "E002"
