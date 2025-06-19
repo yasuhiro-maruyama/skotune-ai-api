@@ -6,6 +6,7 @@ from src.schema.ap001 import ap001 as ap001_schema
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG
 from src.utils.db_utils import error_response
+from passlib.hash import bcrypt
 
 
 # ログイン照会API Service AP001
@@ -19,8 +20,17 @@ def ap001(req: ap001_schema) -> dict:
             # データなし
             if row is None:
                 return {
-                    "success_flg": True,
+                    "success_flg": False,
                     "code": RESPONSE_CODE.NOT_FOUND,
+                    "message": "ユーザー情報が取得できませんでした。",
+                    "user_info": None,
+                }
+
+            # パスワード不一致
+            if not bcrypt.verify(req.password, row["password"]):
+                return {
+                    "success_flg": False,
+                    "code": RESPONSE_CODE.AUTH_ERROR,
                     "message": "ユーザー情報が取得できませんでした。",
                     "user_info": None,
                 }
