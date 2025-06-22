@@ -35,12 +35,16 @@ def ap001(req: ap001_schema) -> dict:
                     "user_info": None,
                 }
 
+            # 取得した情報からパスワードを除外してユーザー情報を設定
+            keys_to_extract = ["user_id", "user_name", "administrator_flg"]
+            user_info = {key: row[key] for key in keys_to_extract}
+
             # ユーザー情報が取得できた場合、ユーザー情報を返却
             return {
                 "success_flg": True,
                 "code": RESPONSE_CODE.SUCCESS,
                 "message": None,
-                "user_info": dict(row),
+                "user_info": user_info,
             }
 
     # ファイル取り込みエラー
