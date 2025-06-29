@@ -23,7 +23,7 @@ def a001001(req: a001001_schema) -> dict:
                     "success_flg": False,
                     "code": RESPONSE_CODE.NOT_FOUND,
                     "message": "ユーザー情報が取得できませんでした。",
-                    "user_info": None,
+                    "response_info": None,
                 }
 
             # パスワード不一致
@@ -32,7 +32,7 @@ def a001001(req: a001001_schema) -> dict:
                     "success_flg": False,
                     "code": RESPONSE_CODE.AUTH_ERROR,
                     "message": "ユーザー情報が取得できませんでした。",
-                    "user_info": None,
+                    "response_info": None,
                 }
 
             # 取得した情報からパスワードを除外してユーザー情報を設定
@@ -44,7 +44,7 @@ def a001001(req: a001001_schema) -> dict:
                 "success_flg": True,
                 "code": RESPONSE_CODE.SUCCESS,
                 "message": None,
-                "user_info": user_info,
+                "response_info": user_info,
             }
 
     # ファイル取り込みエラー
