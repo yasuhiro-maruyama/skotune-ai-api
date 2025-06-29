@@ -2,15 +2,15 @@ from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from src.db.session import SessionLocal
 from src.utils.db_utils import load_sql
-from src.schema.ap001 import ap001 as ap001_schema
+from schema.auth import a001001 as a001001_schema
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG
 from src.utils.db_utils import error_response
 from passlib.hash import bcrypt
 
 
-# ログイン照会API Service AP001
-def ap001(req: ap001_schema) -> dict:
+# A001001_ログイン照会API Service
+def a001001(req: a001001_schema) -> dict:
     try:
         with SessionLocal() as db:
             sql = text(load_sql("select", "user.sql"))
