@@ -32,9 +32,9 @@ def a003002(req: a003002_schema) -> dict:
             }
 
         # レスポンスを形成
-        tune_list = []
+        response_info = []
         for tune in item:
-            tune_list.append(
+            response_info.append(
                 {
                     "artist_id": tune["artists"][0]["id"],
                     "artist_name": tune["artists"][0]["name"],
@@ -47,12 +47,15 @@ def a003002(req: a003002_schema) -> dict:
                 }
             )
 
+        # リリース日の降順にソートする
+        response_info.sort(key=lambda x: x["release_date"], reverse=True)
+
         # 楽曲情報が取得できた場合、楽曲情報を返却
         return {
             "success_flg": True,
             "code": RESPONSE_CODE.SUCCESS,
             "message": None,
-            "response_info": tune_list,
+            "response_info": response_info,
         }
 
     # Spotify通信エラー

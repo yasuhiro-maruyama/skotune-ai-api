@@ -19,8 +19,12 @@ class a003002(BaseModel):
         return values
 
 
-# # A003003_歌手楽曲一覧取得API
-# class a003003(BaseModel):
-#     artist_id: str = Field(
-#         ..., min_length=22, max_length=22, regex=r"^[A-Za-z0-9]+$", description="歌手ID"
-#     )
+# A003003_歌手楽曲一覧取得API
+class a003003(BaseModel):
+    artist_id: str = Field(
+        ...,
+        min_length=22,
+        max_length=22,
+        pattern=r"^[A-Za-z0-9]+$",
+        description="歌手ID",
+    )

@@ -32,9 +32,9 @@ def a003001(req: a003001_schema) -> dict:
             }
 
         # レスポンスを形成
-        artist_list = []
+        response_info = []
         for artist in item:
-            artist_list.append(
+            response_info.append(
                 {
                     "artist_id": artist["id"],
                     "artist_name": artist["name"],
@@ -51,7 +51,7 @@ def a003001(req: a003001_schema) -> dict:
             "success_flg": True,
             "code": RESPONSE_CODE.SUCCESS,
             "message": None,
-            "response_info": artist_list,
+            "response_info": response_info,
         }
 
     # Spotify通信エラー
