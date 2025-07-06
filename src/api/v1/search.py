@@ -22,7 +22,7 @@ def tune(req: a003002_schema):
     return a003002_service.a003002(req)
 
 
-# A003003_歌手楽曲一覧取得API
+# A003003_全楽曲取得API
 @router.post("/artist/tune")
 def artist_tune(req: a003003_schema):
     return a003003_service.a003003(req)

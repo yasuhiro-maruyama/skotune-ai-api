@@ -18,7 +18,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 OFFSET = 50
 
 
-# A003003_歌手楽曲一覧取得API Service
+# A003003_全楽曲取得API Service
 def a003003(req: a003003_schema) -> dict:
     response_info = []
     deduplication_tune = set()

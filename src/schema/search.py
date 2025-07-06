@@ -19,7 +19,7 @@ class a003002(BaseModel):
         return values
 
 
-# A003003_歌手楽曲一覧取得API
+# A003003_全楽曲取得API
 class a003003(BaseModel):
     artist_id: str = Field(
         ...,
