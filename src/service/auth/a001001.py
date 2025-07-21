@@ -31,10 +31,6 @@ def a001001(req: a001001_schema) -> dict:
             # ユーザー情報が取得できた場合、ユーザー情報を返却
             return success_response(user_info)
 
-    # ファイル取り込みエラー
-    except FileNotFoundError as e:
-        return error_response(RESPONSE_CODE.FILE_IMPORT_ERROR, str(e))
-
     # DB接続エラー
     except SQLAlchemyError:
         return error_response(RESPONSE_CODE.DB_ERROR, DB_MSG.DB_ERROR)
