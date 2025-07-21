@@ -15,7 +15,7 @@ def load_sql(function_type: str, filename: str) -> str:
 # 正常系レスポンス
 def success_response(result):
     return {
-        "success_flg": False,
+        "success_flg": True,
         "code": RESPONSE_CODE.SUCCESS,
         "message": None,
         "response_info": result,
