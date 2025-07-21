@@ -17,7 +17,7 @@ def a001001(req: a001001_schema) -> dict:
             row = db.query(M_User).filter(M_User.user_id == req.user_id).first()
 
             # データなし
-            if row is None:
+            if not row:
                 return error_response(RESPONSE_CODE.NOT_FOUND, AUTH_ERROR_MSG)
 
             # パスワード不一致
