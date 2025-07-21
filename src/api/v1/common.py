@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 # A000001_ヘルスチェックAPI
-@router.post("/health")
+@router.get("/health")
 def a000001():
     return a000001_service.a000001()
 
