@@ -2,7 +2,7 @@
 　 python -m venv venv
 
 有効化
-　.\venv\Scripts\activate.bat
+　.\venv\Scripts\activate
 
 モジュールインストール
 

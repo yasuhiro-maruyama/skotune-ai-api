@@ -1,18 +1,18 @@
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
-from src.db.session import SessionLocal
-from src.utils.db_utils import load_sql
+from db.session import SessionLocal
+from utils.utils import load_sql
 from schema.auth import a001002 as a001002_schema
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG
-from src.utils.db_utils import error_response
+from utils.utils import error_response
 
 
 # A001002_メニュー機能取得API Service
 def a001002(req: a001002_schema) -> dict:
     try:
         with SessionLocal() as db:
-            sql = text(load_sql("select", "menu.sql"))
+            sql = text(load_sql("auth", "select_menu.sql"))
             result = db.execute(sql, {"admin": req.administrator_flg})
             row = result.mappings().all()
 

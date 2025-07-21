@@ -1,7 +1,7 @@
 # テーブル削除
 import argparse
 from sqlalchemy import MetaData, Table
-from src.db.session import engine
+from db.session import engine
 from lib.db_constants import SCHEMA_NAME
 
 

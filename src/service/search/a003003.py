@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from schema.search import a003003 as a003003_schema
 from lib.api_constants import RESPONSE_CODE
-from src.utils.db_utils import error_response
+from utils.utils import error_response
 
 # envファイル読み込み
 load_dotenv()
