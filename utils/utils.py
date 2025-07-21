@@ -1,5 +1,6 @@
-# 共通関数(DB用)
+# 共通関数
 from pathlib import Path
+from lib.api_constants import RESPONSE_CODE
 
 
 # SQLファイル読み込み
@@ -9,6 +10,16 @@ def load_sql(function_type: str, filename: str) -> str:
     if not sql_path.exists():
         raise FileNotFoundError(f"SQLファイルが見つかりません: {sql_path}")
     return sql_path.read_text(encoding="utf-8")
+
+
+# 正常系レスポンス
+def success_response(result):
+    return {
+        "success_flg": False,
+        "code": RESPONSE_CODE.SUCCESS,
+        "message": None,
+        "response_info": result,
+    }
 
 
 # 異常系レスポンス
