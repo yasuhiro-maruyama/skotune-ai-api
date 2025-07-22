@@ -13,7 +13,13 @@ def a000004(req: a000004_schema) -> dict:
         with SessionLocal() as db:
             # メニューマスタからデータ取得
             query = (
-                db.query(M_Menu)
+                db.query(
+                    M_Menu.sort,
+                    M_Menu.label,
+                    M_Menu.icon,
+                    M_Menu.content,
+                    M_Menu.administrator_flg,
+                )
                 .filter(M_Menu.delete_flg == False)
                 .order_by(M_Menu.sort)
             )
@@ -32,7 +38,7 @@ def a000004(req: a000004_schema) -> dict:
                 )
 
             # 取得できた場合、メニュー情報を返却
-            return success_response([dict(r) for r in row])
+            return success_response([r._asdict() for r in row])
 
     # ファイル取り込みエラー
     except FileNotFoundError as e:
