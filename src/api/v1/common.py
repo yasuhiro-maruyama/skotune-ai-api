@@ -2,10 +2,12 @@
 from fastapi import APIRouter
 
 from schema.common import a000004 as a000004_schema
+from schema.common import a000005 as a000005_schema
 
 from src.service.common import a000001 as a000001_service
 from src.service.common import a000002 as a000002_service
 from src.service.common import a000004 as a000004_service
+from src.service.common import a000005 as a000005_service
 
 router = APIRouter()
 
@@ -26,3 +28,9 @@ def a000002():
 @router.post("/menu")
 def a000004(req: a000004_schema):
     return a000004_service.a000004(req)
+
+
+# A000005_コード値取得API
+@router.post("/code")
+def a000005(req: a000005_schema):
+    return a000005_service.a000005(req)

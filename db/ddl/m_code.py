@@ -1,0 +1,28 @@
+# コードマスタ定義
+from sqlalchemy import Column, String, Boolean, DateTime, text
+from datetime import datetime, timezone
+from db.session import Base
+from lib.db_constants import SCHEMA_NAME
+
+
+class M_Code(Base):
+    # スキーマ名
+    __table_args__ = {"schema": SCHEMA_NAME}
+    # テーブル名
+    __tablename__ = "m_code"
+
+    # カラム定義
+    code_id = Column(String(4), primary_key=True)
+    code_value = Column(String(2), primary_key=True)
+    code_name = Column(String(200), nullable=False)
+    insert_date = Column(
+        DateTime(timezone=True),
+        server_default=text("CURRENT_TIMESTAMP"),
+        nullable=False,
+    )
+    update_date = Column(
+        DateTime(timezone=True),
+        default=None,
+        onupdate=lambda: datetime.now(timezone.utc),
+    )
+    delete_flg = Column(Boolean, nullable=False, server_default=text("false"))
