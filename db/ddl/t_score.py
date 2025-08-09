@@ -26,7 +26,7 @@ class T_Score(Base):
     scoring_date = Column(
         Date,
         server_default=text("CURRENT_DATE"),
-        nullable=False,
+        primary_key=True,
     )
     insert_date = Column(
         DateTime(timezone=True),

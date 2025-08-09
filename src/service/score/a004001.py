@@ -46,7 +46,7 @@ def a004001(req: a004001_schema) -> dict:
             db.commit()
 
             # 正常終了
-            return success_response(None)
+            return success_response({"status": "ok"})
 
     # DB接続エラー
     except SQLAlchemyError:
