@@ -8,6 +8,6 @@ router = APIRouter()
 
 
 # A004001_採点履歴登録API
-@router.post("/score/register")
+@router.post("/register")
 def a004001(req: a004001_schema):
     return a004001_service.a004001(req)
