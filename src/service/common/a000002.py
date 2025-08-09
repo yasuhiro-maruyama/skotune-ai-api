@@ -6,6 +6,7 @@ from db.ddl import m_menu
 from db.ddl import m_artist
 from db.ddl import m_tune
 from db.ddl import m_features
+from db.ddl import t_score
 from sqlalchemy.exc import SQLAlchemyError
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG

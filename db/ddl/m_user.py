@@ -2,6 +2,7 @@
 from sqlalchemy import Column, String, Boolean, DateTime, text
 from datetime import datetime, timezone
 from db.session import Base
+from sqlalchemy.orm import relationship
 from lib.db_constants import SCHEMA_NAME
 
 
@@ -28,3 +29,6 @@ class M_User(Base):
         onupdate=lambda: datetime.now(timezone.utc),
     )
     delete_flg = Column(Boolean, nullable=False, server_default=text("false"))
+
+    # リレーション設定
+    score = relationship("T_Score", back_populates="user")

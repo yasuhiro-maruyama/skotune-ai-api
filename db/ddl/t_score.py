@@ -1,5 +1,5 @@
-# 楽曲マスタ定義
-from sqlalchemy import Column, String, Boolean, DateTime
+# 採点テーブル定義
+from sqlalchemy import Column, String, Numeric, Boolean, Date, DateTime
 from datetime import datetime, timezone
 from db.session import Base
 from sqlalchemy import ForeignKey
@@ -8,18 +8,26 @@ from sqlalchemy import text
 from lib.db_constants import SCHEMA_NAME
 
 
-class M_Tune(Base):
+class T_Score(Base):
     # スキーマ名
     __table_args__ = {"schema": SCHEMA_NAME}
     # テーブル名
-    __tablename__ = "m_tune"
+    __tablename__ = "t_score"
 
     # カラム定義
-    tune_id = Column(String(22), primary_key=True)
-    artist_id = Column(
-        String(22), ForeignKey(f"{SCHEMA_NAME}.m_artist.artist_id"), nullable=False
+    user_id = Column(
+        String(200), ForeignKey(f"{SCHEMA_NAME}.m_user.user_id"), primary_key=True
     )
-    tune_name = Column(String(200), nullable=False)
+    tune_id = Column(
+        String(22), ForeignKey(f"{SCHEMA_NAME}.m_tune.tune_id"), primary_key=True
+    )
+    model_type = Column(String(2), primary_key=True)
+    score = Column(Numeric(7, 3), nullable=False)
+    scoring_date = Column(
+        Date,
+        server_default=text("CURRENT_DATE"),
+        nullable=False,
+    )
     insert_date = Column(
         DateTime(timezone=True),
         server_default=text("CURRENT_TIMESTAMP"),
@@ -33,6 +41,5 @@ class M_Tune(Base):
     delete_flg = Column(Boolean, nullable=False, server_default=text("false"))
 
     # リレーション設定
-    artist = relationship("M_Artist", back_populates="tune")
-    score = relationship("T_Score", back_populates="tune")
-    features = relationship("M_Features", back_populates="tune", uselist=False)
+    user = relationship("M_User", back_populates="score")
+    tune = relationship("M_Tune", back_populates="score")
