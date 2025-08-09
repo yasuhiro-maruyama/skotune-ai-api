@@ -2,6 +2,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG
 from utils.utils import success_response, error_response
+from db.ddl.m_user import M_User
 from db.ddl.m_artist import M_Artist
 from db.ddl.m_tune import M_Tune
 from db.ddl.t_score import T_Score
@@ -13,8 +14,25 @@ from schema.score import a004001 as a004001_schema
 def a004001(req: a004001_schema) -> dict:
     try:
         with SessionLocal() as db:
+            # ユーザーが存在しない場合、異常終了
+            row = (
+                db.query(M_User)
+                .filter(M_User.user_id == req.user_id, M_User.delete_flg == False)
+                .first()
+            )
+            if not row:
+                return error_response(
+                    RESPONSE_CODE.AUTH_ERROR, "ユーザーが存在しません。"
+                )
+
             # アーティストが存在しない場合、アーティスト情報を登録
-            row = db.query(M_Artist).filter(M_Artist.artist_id == req.artist_id).first()
+            row = (
+                db.query(M_Artist)
+                .filter(
+                    M_Artist.artist_id == req.artist_id, M_Artist.delete_flg == False
+                )
+                .first()
+            )
             if not row:
                 artist = M_Artist(
                     artist_id=req.artist_id,
@@ -23,7 +41,11 @@ def a004001(req: a004001_schema) -> dict:
                 db.add(artist)
 
             # 楽曲が存在しない場合、楽曲情報を登録
-            row = db.query(M_Tune).filter(M_Tune.tune_id == req.tune_id).first()
+            row = (
+                db.query(M_Tune)
+                .filter(M_Tune.tune_id == req.tune_id, M_Tune.delete_flg == False)
+                .first()
+            )
             if not row:
                 tune = M_Tune(
                     tune_id=req.tune_id,
