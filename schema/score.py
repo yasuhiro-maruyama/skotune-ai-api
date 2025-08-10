@@ -31,3 +31,36 @@ class a004001(BaseModel):
     model_type: str = Field(..., min_length=2, max_length=2, description="採点機種")
     score: ScoreType
     scoring_date: date = Field(..., description="採点日")
+
+
+# A004003_採点履歴更新API
+class a004003(BaseModel):
+    user_id: str = Field(..., max_length=200, description="ユーザーID")
+    tune_id: str = Field(
+        ...,
+        min_length=22,
+        max_length=22,
+        pattern=r"^[A-Za-z0-9]+$",
+        description="楽曲ID",
+    )
+    model_type: str = Field(..., min_length=2, max_length=2, description="採点機種")
+    score: ScoreType
+    scoring_date: date = Field(..., description="採点日")
+    registered_model_type: str = Field(
+        ..., min_length=2, max_length=2, description="登録済み採点機種"
+    )
+    registered_scoring_date: date = Field(..., description="登録済み採点日")
+
+
+# A004004_採点履歴削除API
+class a004004(BaseModel):
+    user_id: str = Field(..., max_length=200, description="ユーザーID")
+    tune_id: str = Field(
+        ...,
+        min_length=22,
+        max_length=22,
+        pattern=r"^[A-Za-z0-9]+$",
+        description="楽曲ID",
+    )
+    model_type: str = Field(..., min_length=2, max_length=2, description="採点機種")
+    scoring_date: date = Field(..., description="採点日")

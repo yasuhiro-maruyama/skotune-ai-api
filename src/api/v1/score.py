@@ -2,7 +2,11 @@
 from fastapi import APIRouter
 
 from schema.score import a004001 as a004001_schema
+from schema.score import a004003 as a004003_schema
+from schema.score import a004004 as a004004_schema
 from src.service.score import a004001 as a004001_service
+from src.service.score import a004003 as a004003_service
+from src.service.score import a004004 as a004004_service
 
 router = APIRouter()
 
@@ -11,3 +15,15 @@ router = APIRouter()
 @router.post("/register")
 def a004001(req: a004001_schema):
     return a004001_service.a004001(req)
+
+
+# A004003_採点履歴更新API
+@router.post("/update")
+def a004003(req: a004003_schema):
+    return a004003_service.a004003(req)
+
+
+# A004004_採点履歴削除API
+@router.post("/delete")
+def a004004(req: a004004_schema):
+    return a004004_service.a004004(req)

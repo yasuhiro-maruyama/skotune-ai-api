@@ -9,4 +9,4 @@ class a000004(BaseModel):
 
 # A000005_コード値取得API
 class a000005(BaseModel):
-    code_id: str = Field(max_length=4, description="コードID")
+    code_id: str = Field(min_length=4, max_length=4, description="コードID")

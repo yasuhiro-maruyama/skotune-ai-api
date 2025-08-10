@@ -22,6 +22,15 @@ def success_response(result):
     }
 
 
+# データ0件レスポンス
+def nodata_response(message: str):
+    return {
+        "success_flg": True,
+        "code": RESPONSE_CODE.NOT_FOUND,
+        "message": message,
+    }
+
+
 # 異常系レスポンス
 def error_response(code: str, message: str):
     return {

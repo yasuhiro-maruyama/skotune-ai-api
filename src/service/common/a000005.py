@@ -3,7 +3,7 @@ from db.session import SessionLocal
 from schema.common import a000005 as a000005_schema
 from lib.api_constants import RESPONSE_CODE
 from lib.message import DB_MSG
-from utils.utils import success_response, error_response
+from utils.utils import success_response, error_response, nodata_response
 from db.ddl.m_code import M_Code
 
 
