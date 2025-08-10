@@ -54,15 +54,27 @@ def a004001(req: a004001_schema) -> dict:
                 )
                 db.add(tune)
 
-            # 採点結果を登録
-            score = T_Score(
-                user_id=req.user_id,
-                tune_id=req.tune_id,
-                model_type=req.model_type,
-                score=req.score,
-                scoring_date=req.scoring_date,
+            # 採点情報が存在しない場合、採点情報を登録
+            row = (
+                db.query(T_Score)
+                .filter(
+                    T_Score.user_id == req.user_id,
+                    T_Score.tune_id == req.tune_id,
+                    T_Score.model_type == req.model_type,
+                    T_Score.scoring_date == req.scoring_date,
+                    T_Score.delete_flg == False,
+                )
+                .first()
             )
-            db.add(score)
+            if not row:
+                score = T_Score(
+                    user_id=req.user_id,
+                    tune_id=req.tune_id,
+                    model_type=req.model_type,
+                    score=req.score,
+                    scoring_date=req.scoring_date,
+                )
+                db.add(score)
 
             # コミット
             db.commit()
