@@ -33,6 +33,13 @@ class a004001(BaseModel):
     scoring_date: date = Field(..., description="採点日")
 
 
+# A004002_採点履歴検索API
+class a004002(BaseModel):
+    user_id: str = Field(..., max_length=200, description="ユーザーID")
+    from_date: date = Field(None, description="開始日")
+    to_date: date = Field(None, description="終了日")
+
+
 # A004003_採点履歴更新API
 class a004003(BaseModel):
     user_id: str = Field(..., max_length=200, description="ユーザーID")
